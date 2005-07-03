@@ -1,0 +1,25 @@
+UNIVERSAL::can
+--------------
+
+Version 1.00, Sun Jul  3 21:37:12 UTC 2005
+
+This module attempts to work around people calling UNIVERSAL::can() as a
+function, which it is not.
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+    perl Build.PL
+    ./Build
+    ./Build test
+    ./Build install
+
+There is also a Makefile.PL, but I don't use it.
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2005 chromatic
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.

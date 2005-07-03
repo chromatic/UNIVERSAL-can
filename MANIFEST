@@ -1,0 +1,13 @@
+Build.PL
+Changes
+MANIFEST
+META.yml # Will be created by "make dist"
+README
+lib/UNIVERSAL/can.pm
+t/00-load.t
+t/class.t
+t/object.t
+t/pod-coverage.t
+t/pod.t
+Makefile.PL
+SIGNATURE    Added here by Module::Build

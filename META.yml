@@ -1,0 +1,17 @@
+---
+name: UNIVERSAL-can
+version: 1.00
+author:
+  - chromatic <chromatic@wgz.org>
+abstract: Hack around people calling UNIVERSAL::can() as a function
+license: perl
+requires:
+  Scalar::Util: ''
+build_requires:
+  Test::Simple: 0.60
+  Test::Warn: 0.08
+provides:
+  UNIVERSAL::can:
+    file: lib/UNIVERSAL/can.pm
+    version: 1.00
+generated_by: Module::Build version 0.2611
