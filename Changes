@@ -1,4 +1,9 @@
 Revision history for UNIVERSAL::can
 
+1.01	Wed Dec 14 00:19:22 UTC 2005
+	- check for uninitialized invocant (patch from Stevan Little)
+	- squelch unnecessary warnings (wow, a typo!)
+	- added a bit more advice to the documentation
+
 1.00    Sun Jul  3 21:38:47 UTC 2005
-        First version, released on an unsuspecting world.
+	- First version, released on an unsuspecting world.

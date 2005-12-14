@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use vars qw( $VERSION $recursing );
-$VERSION = '1.00';
+$VERSION = '1.01';
 
 use Scalar::Util 'blessed';
 use warnings::register;
@@ -21,6 +21,8 @@ BEGIN
 
 sub can
 {
+	return _report_warning() unless defined $_[0];
+
 	goto &$orig if $recursing;
 	goto &$orig unless _is_invocant( $_[0] );
 
@@ -30,14 +32,20 @@ sub can
 	local $recursing = 1;
 	my $invocant     = shift;
 
+	_report_warning();
+	return $invocant->can( @_ );
+}
+
+sub _report_warning
+{
 	if (warnings::enabled())
 	{
-		my $calling_sub  = ( caller( 1 ) )[3] || '';
+		my $calling_sub  = ( caller( 2 ) )[3] || '';
 		warnings::warn( "Called UNIVERSAL::can() as a function, not a method" )
 			if $calling_sub !~ /::can$/;
 	}
 
-	return $invocant->can( @_ );
+	return;
 }
 
 sub _is_invocant
@@ -72,13 +80,13 @@ UNIVERSAL::can - Hack around people calling UNIVERSAL::can() as a function
 
 =head1 VERSION
 
-Version 1.00
+Version 1.01
 
 =head1 SYNOPSIS
 
 To use this module, simply:
 
-    use UNIVERSAL::can;
+  use UNIVERSAL::can;
 
 =head1 DESCRIPTION
 
@@ -91,16 +99,24 @@ functions, bypassing any possible overriding.  This is wrong and you should not
 do it.  Unfortunately, not everyone heeds this warning and their bad code can
 break your good code.
 
-Fortunately, this module replaces C<UNIVERSAL::can()> with a method that checks
-to see if the first argument is a valid invocant (whether an object -- a
-blessed referent -- or the name of a class).  If so, and if the invocant's
-class has its own C<can()> method, it calls that as a method.  Otherwise,
-everything works as you might expect.
+This module replaces C<UNIVERSAL::can()> with a method that checks to see if
+the first argument is a valid invocant (whether an object -- a blessed referent
+-- or the name of a class).  If so, and if the invocant's class has its own
+C<can()> method, it calls that as a method.  Otherwise, everything works as you
+might expect.
 
 If someone attempts to call C<UNIVERSAL::can()> as a function, this module will
 emit a lexical warning (see L<perllexwarn>) to that effect.  You can disable it
 with C<no warnings;> or C<no warnings 'UNIVERSAL::isa';>, but don't do that;
 fix the code instead.
+
+Some people argue that you must call C<UNIVERSAL::can()> as a function because
+you don't know if your proposed invocant is a valid invocant.  That's silly.
+Use C<blessed()> from L<Scalar::Util> if you want to check that the potential
+invocant is an object or call the method anyway in an C<eval> block and check
+for failure.
+
+Just don't break working code.
 
 =head1 EXPORT
 

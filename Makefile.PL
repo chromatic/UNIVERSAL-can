@@ -2,14 +2,14 @@
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
-          'PL_FILES' => {},
-          'INSTALLDIRS' => 'site',
           'NAME' => 'UNIVERSAL::can',
           'VERSION_FROM' => 'lib/UNIVERSAL/can.pm',
           'PREREQ_PM' => {
                            'Scalar::Util' => '',
-                           'Test::Warn' => '0.08',
-                           'Test::Simple' => '0.60'
-                         }
+                           'Test::Simple' => '0.60',
+                           'Test::Warn' => '0.08'
+                         },
+          'INSTALLDIRS' => 'site',
+          'PL_FILES' => {}
         )
 ;
