@@ -1,6 +1,6 @@
 ---
 name: UNIVERSAL-can
-version: 1.01
+version: 1.02
 author:
   - chromatic <chromatic@wgz.org>
 abstract: Hack around people calling UNIVERSAL::can() as a function
@@ -13,5 +13,5 @@ build_requires:
 provides:
   UNIVERSAL::can:
     file: lib/UNIVERSAL/can.pm
-    version: 1.01
+    version: 1.02
 generated_by: Module::Build version 0.2611

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use vars qw( $VERSION $recursing );
-$VERSION = '1.01';
+$VERSION = '1.02';
 
 use Scalar::Util 'blessed';
 use warnings::register;
@@ -26,6 +26,7 @@ sub can
 	goto &$orig if $recursing;
 	goto &$orig unless _is_invocant( $_[0] );
 
+	local $@;
 	my $can = eval { $_[0]->$orig( 'can' ) || 0 };
 	goto &$orig if $can == \&UNIVERSAL::can;
 
@@ -140,7 +141,7 @@ chromatic, C<< <chromatic@wgz.org> >>
 Please report any bugs or feature requests to C<bug-universal-can@rt.cpan.org>,
 or through the web interface at
 L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=UNIVERSAL-can>.  This will
-notify me, hold onto patches so I don't drop them, and will notify you of
+contact me, hold onto patches so I don't drop them, and will notify you of
 progress on your request as I make changes.
 
 =head1 ACKNOWLEDGEMENTS
@@ -149,7 +150,7 @@ Inspired by L<UNIVERSAL::isa> by Yuval Kogman, Autrijus Tang, and myself.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2005 chromatic, All Rights Reserved.
+Copyright (c) 2005 - 2006 chromatic. All rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

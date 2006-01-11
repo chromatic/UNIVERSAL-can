@@ -1,15 +1,9 @@
 #!perl
 
-BEGIN
-{
-	chdir 't' if -d 't';
-	use lib '../lib';
-}
-
 use strict;
 use warnings;
 
-use Test::More tests => 5;
+use Test::More tests => 6;
 use Test::Warn;
 
 # enable lexical warnings from module at compile time
@@ -56,6 +50,7 @@ my $foo = Foo->new( foo => 'it is foo', bar => 'it is not foo' );
 
 my ($can_foo, $can_baz);
 
+eval { die "Failure\n" };
 {
 	no warnings 'UNIVERSAL::can';
 	$can_foo = UNIVERSAL::can( $foo, 'foo' );
@@ -65,5 +60,7 @@ my ($can_foo, $can_baz);
 ok(   defined  $can_foo,
 	'UNIVERSAL::can() should return a true value, if possible' );
 ok(   defined &$can_foo, '... a code ref, if possible' );
-ok( ! defined $ can_baz, '... or undef if not' );
+ok( ! defined  $can_baz, '... or undef if not' );
+
 is( $can_foo->(), 'it is foo', '... the proper code ref' );
+is( $@, "Failure\n", '... not eating any exceptions already thrown' );
