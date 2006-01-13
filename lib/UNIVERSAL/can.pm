@@ -3,8 +3,10 @@ package UNIVERSAL::can;
 use strict;
 use warnings;
 
+use 5.006;
+
 use vars qw( $VERSION $recursing );
-$VERSION = '1.02';
+$VERSION = '1.03';
 
 use Scalar::Util 'blessed';
 use warnings::register;
@@ -24,7 +26,6 @@ sub can
 	return _report_warning() unless defined $_[0];
 
 	goto &$orig if $recursing;
-	goto &$orig unless _is_invocant( $_[0] );
 
 	local $@;
 	my $can = eval { $_[0]->$orig( 'can' ) || 0 };
@@ -147,6 +148,9 @@ progress on your request as I make changes.
 =head1 ACKNOWLEDGEMENTS
 
 Inspired by L<UNIVERSAL::isa> by Yuval Kogman, Autrijus Tang, and myself.
+
+Adam Kennedy has tirelessly made me tired by reporting potential bugs and
+suggesting ideas that found actual bugs.
 
 =head1 COPYRIGHT & LICENSE
 

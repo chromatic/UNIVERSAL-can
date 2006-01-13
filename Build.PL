@@ -9,6 +9,7 @@ my $builder = Module::Build->new(
     dist_version_from   => 'lib/UNIVERSAL/can.pm',
 	requires            =>
 	{
+		'perl'          => '5.6.0',
 		'Scalar::Util'  => '',
 	},
     build_requires      =>

@@ -1,7 +1,7 @@
 UNIVERSAL::can
 --------------
 
-Version 1.02, Wed Jan 11 01:01:31 UTC 2006
+Version 1.03, Fri Jan 13 05:11:25 UTC 2006
 
 This module attempts to work around people calling UNIVERSAL::can() as a
 function, which it is not.
@@ -12,8 +12,8 @@ To install this module, run the following commands:
 
     perl Build.PL
     perl ./Build
-    perl¬./Build test
-    perl¬./Build install
+    perl ./Build test
+    perl ./Build install
 
 There is also a Makefile.PL, but I don't use it.
 

@@ -1,12 +1,17 @@
 Revision history for UNIVERSAL::can
 
-1.02    Wed Jan 11 00:58:57 UTC 2006
+1.03  Fri Jan 13 04:46:59 UTC 2006
+	- mark minimum dependency on Perl 5.6 (reported by Adam Kennedy)
+	- test for Really Bad Input (also suggested by Adam Kennedy)
+	- fixed invalid input bugs
+
+1.02  Wed Jan 11 00:58:57 UTC 2006
 	- don't eat $@ in can() (RT #17008, reported by martin at hybyte dot com)
 
-1.01	Wed Dec 14 00:19:22 UTC 2005
+1.01  Wed Dec 14 00:19:22 UTC 2005
 	- check for uninitialized invocant (patch from Stevan Little)
 	- squelch unnecessary warnings (wow, a typo!)
 	- added a bit more advice to the documentation
 
-1.00    Sun Jul  3 21:38:47 UTC 2005
+1.00  Sun Jul  3 21:38:47 UTC 2005
 	- First version, released on an unsuspecting world.
