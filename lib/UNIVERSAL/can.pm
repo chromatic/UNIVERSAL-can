@@ -6,12 +6,13 @@ use warnings;
 use 5.006;
 
 use vars qw( $VERSION $recursing );
-$VERSION = '1.03';
+$VERSION = '1.10';
 
 use Scalar::Util 'blessed';
 use warnings::register;
 
 my $orig;
+use vars '$always_warn';
 
 BEGIN
 {
@@ -21,29 +22,51 @@ BEGIN
 	*UNIVERSAL::can = \&can;
 }
 
+sub import
+{
+	my ($class, $flag) = @_;
+	$always_warn       = $flag if defined $flag;
+
+	no strict 'refs';
+	*{ caller() . '::can' } = \&can;
+}
+
 sub can
 {
+	# can't call this on undef
 	return _report_warning() unless defined $_[0];
 
+	# don't get into a loop here
 	goto &$orig if $recursing;
 
+	# call an overridden can() if it exists
 	local $@;
-	my $can = eval { $_[0]->$orig( 'can' ) || 0 };
+	my $can = eval { $_[0]->$orig('can') || 0 };
+
+	# but not if it inherited this one
 	goto &$orig if $can == \&UNIVERSAL::can;
 
+	# make sure the invocant is useful
+	unless ( eval { $_[0]->isa('UNIVERSAL') } )
+	{
+		_report_warning();
+		goto &$orig;
+	}
+
+	# redirect to an overridden can, making sure not to recurse and warning
 	local $recursing = 1;
-	my $invocant     = shift;
+	my $invocant = shift;
 
 	_report_warning();
-	return $invocant->can( @_ );
+	return $invocant->can(@_);
 }
 
 sub _report_warning
 {
-	if (warnings::enabled())
+	if ( $always_warn || warnings::enabled() )
 	{
-		my $calling_sub  = ( caller( 2 ) )[3] || '';
-		warnings::warn( "Called UNIVERSAL::can() as a function, not a method" )
+		my $calling_sub = ( caller(2) )[3] || '';
+		warnings::warn("Called UNIVERSAL::can() as a function, not a method")
 			if $calling_sub !~ /::can$/;
 	}
 
@@ -53,7 +76,7 @@ sub _report_warning
 sub _is_invocant
 {
 	my $potential = shift;
-	return 1 if blessed( $potential );
+	return 1 if blessed($potential);
 
 	my $symtable = \%::;
 	my $found    = 1;
@@ -61,13 +84,13 @@ sub _is_invocant
 	for my $symbol ( split( /::/, $potential ) )
 	{
 		$symbol .= '::';
-		unless ( exists $symtable->{ $symbol } )
+		unless ( exists $symtable->{$symbol} )
 		{
 			$found = 0;
 			last;
 		}
 
-		$symtable = $symtable->{ $symbol };
+		$symtable = $symtable->{$symbol};
 	}
 
 	return $found;
@@ -123,7 +146,11 @@ Just don't break working code.
 =head1 EXPORT
 
 By default, this module exports a C<can()> subroutine that works exactly as
-described.  It's a convenient shortcut for you.
+described.  It's a convenient shortcut for you.  This actually works in version
+1.10.
+
+Also, if you pass the C<-always_warn> flag on the import line, this module will
+warn about all incorrect uses of C<UNIVERSAL::can()>.  This can help you change your code to be correct.
 
 =head2 can()
 
@@ -151,6 +178,8 @@ Inspired by L<UNIVERSAL::isa> by Yuval Kogman, Autrijus Tang, and myself.
 
 Adam Kennedy has tirelessly made me tired by reporting potential bugs and
 suggesting ideas that found actual bugs.
+
+Mark Clements helped to track down an invalid invocant bug.
 
 =head1 COPYRIGHT & LICENSE
 

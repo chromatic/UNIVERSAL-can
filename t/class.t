@@ -3,8 +3,10 @@
 use strict;
 use warnings;
 
+use lib 't/lib';
+
 use Test::More tests => 16;
-use Test::Warn;
+use Test::SmallWarn;
 
 # must happen here to register warnings category
 BEGIN { use_ok( 'UNIVERSAL::can' ) };

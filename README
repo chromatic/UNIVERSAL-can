@@ -1,7 +1,7 @@
 UNIVERSAL::can
 --------------
 
-Version 1.03, Fri Jan 13 05:11:25 UTC 2006
+Version 1.10, Fri Feb 10 01:17:42 UTC 2006
 
 This module attempts to work around people calling UNIVERSAL::can() as a
 function, which it is not.
@@ -21,5 +21,5 @@ COPYRIGHT AND LICENCE
 
 Copyright (C) 2005 - 2006 chromatic
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This library is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.

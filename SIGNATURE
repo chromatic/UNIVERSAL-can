@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.50.
+signed via the Module::Signature module, version 0.53.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -15,22 +15,24 @@ not run its Makefile.PL or Build.PL.
 Hash: SHA1
 
 SHA1 ebbcb42bf540dd4c84276cd5cbc26cc745f0e82d Build.PL
-SHA1 10ef5456317eedfb80d47bbb470ef2e6e85a0f58 Changes
-SHA1 36af2bc4b28aedf23fe11edae3ddd48bebed07cd MANIFEST
-SHA1 4543277a9607dfefdeddc03a895a948337a79857 META.yml
+SHA1 38e74639909de22bd0b31fa5d3aea40aa0a81c47 Changes
+SHA1 e7891d59528444bed0bf950990e7b9cb47888930 MANIFEST
+SHA1 35c5feaeb7040c7b5c10e940a9b02dad7345d6ee META.yml
 SHA1 ce60fe3080a325ba30ba512336ec09e335e84da6 Makefile.PL
-SHA1 661fb46f68afdeaf862b8c18d30f05d29bfabd39 README
-SHA1 c1c47668934653acb927665cb0b48449c74431cb lib/UNIVERSAL/can.pm
-SHA1 d51360160395b93d0e2d3051ec7783da747e86b4 t/00-load.t
-SHA1 2b1d9181ed63a4987b6c68718d6a5ba83d99e71b t/bad-input.t
-SHA1 b10940828f31f5e34073e0010761bf5a5895bee7 t/class.t
+SHA1 392ddf0537a502037fccab670dc98dd7d20f7724 README
+SHA1 6fe3ed5ab98f008c831745e2dcf72eeab18bfb2a lib/UNIVERSAL/can.pm
+SHA1 e224a81db7b3e4b09fe98dd3aca3b2f991325659 t/00-load.t
+SHA1 d002b983ef8c52000497b452f1f5cc3efdfb6c0d t/always_warn.t
+SHA1 d330e00404d24a7012161dddf04d480f11d7b884 t/bad-input.t
+SHA1 3cd19d593956c0bc25aa0c4b8527cf10c9f5c90a t/class.t
+SHA1 1e547bdc8dde8e1b004574d7124b088861a000b9 t/lib/Test/SmallWarn.pm
 SHA1 b6d69b97bcd488d1877d5fda3f148eb4a30ee07a t/object.t
 SHA1 c9986c0674bd6a37f3f5cdb3250d857f0935cf86 t/pod-coverage.t
 SHA1 0190346d7072d458c8a10a45c19f86db641dcc48 t/pod.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.2 (GNU/Linux)
 
-iD8DBQFDxzamqX/z6NoU2UoRAiEJAKCSqNet4H2yii5yod2//2U0VpP1+gCgjKX7
-wrkps8+RCcmkCMfgwdceVQw=
-=qgbR
+iD8DBQFD6+9/qX/z6NoU2UoRAksoAJ40VDGXndC3jbn9gm5sMi/FcvWjaQCfcAoh
+9mW5jDfQhh9yEMpdZOeSjjw=
+=xqfq
 -----END PGP SIGNATURE-----

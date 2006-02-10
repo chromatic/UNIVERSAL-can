@@ -3,6 +3,8 @@
 use strict;
 use warnings;
 
+use lib 't/lib';
+
 # add all sorts of bad input that might get crazy results
 my @inputs;
 
@@ -10,14 +12,13 @@ BEGIN
 {
 	@inputs =
 	(
-		undef, '', \'', {}, [], 0, sub {}, do { local *FH; *FH }, -1, 0.003
+		undef, '', \'', {}, [], 0, sub {}, do { local *FH; *FH }, -1, 0.003, '.'
 	);
 }
 
 # don't hardcode the test number, but do check for premature death
 use Test::More tests => ( @inputs * 2 ) + 1;
-use Test::Warn;
-use Test::Exception;
+use Test::SmallWarn;
 
 # enable lexical warnings from module at compile time
 BEGIN { use_ok( 'UNIVERSAL::can' ) }
@@ -60,10 +61,10 @@ for my $bad ( @inputs )
 {
 	my $bad_name = defined $bad ? $bad : '(undef)';
 
-	lives_ok { no warnings; UNIVERSAL::can( $bad, 'id') }
-	    "test did not die for bad input '$bad_name'";
+	my $flag;
 
-	warning_like { eval { UNIVERSAL::can( $bad, 'id') } }
+	warning_like { $flag = eval { UNIVERSAL::can( $bad, 'id' ); 1 } }
 	    qr/^Called UNIVERSAL\:\:can\(\) as a function\, not a method/, 
- 		"... received exactly one warning for bad input '$bad_name'";
+ 		"test received exactly one warning for bad input '$bad_name'";
+	ok( $flag, '... and did not throw an exception' );
 }

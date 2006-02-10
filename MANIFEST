@@ -4,7 +4,9 @@ MANIFEST
 META.yml # Will be created by "make dist"
 README
 lib/UNIVERSAL/can.pm
+t/lib/Test/SmallWarn.pm
 t/00-load.t
+t/always_warn.t
 t/bad-input.t
 t/class.t
 t/object.t
