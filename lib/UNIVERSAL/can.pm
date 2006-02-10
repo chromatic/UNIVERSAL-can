@@ -6,7 +6,7 @@ use warnings;
 use 5.006;
 
 use vars qw( $VERSION $recursing );
-$VERSION = '1.10';
+$VERSION = '1.11';
 
 use Scalar::Util 'blessed';
 use warnings::register;
@@ -24,11 +24,13 @@ BEGIN
 
 sub import
 {
-	my ($class, $flag) = @_;
-	$always_warn       = $flag if defined $flag;
-
-	no strict 'refs';
-	*{ caller() . '::can' } = \&can;
+	my $class = shift;
+	for my $import (@_)
+	{
+		$always_warn = 1 if $import eq '-always_warn';
+		no strict 'refs';
+		*{ caller() . '::can' } = \&can if $import eq 'can';
+	}
 }
 
 sub can
@@ -47,7 +49,7 @@ sub can
 	goto &$orig if $can == \&UNIVERSAL::can;
 
 	# make sure the invocant is useful
-	unless ( eval { $_[0]->isa('UNIVERSAL') } )
+	unless ( _is_invocant( $_[0] ) )
 	{
 		_report_warning();
 		goto &$orig;
@@ -76,6 +78,7 @@ sub _report_warning
 sub _is_invocant
 {
 	my $potential = shift;
+	return unless length $potential;
 	return 1 if blessed($potential);
 
 	my $symtable = \%::;
@@ -145,9 +148,9 @@ Just don't break working code.
 
 =head1 EXPORT
 
-By default, this module exports a C<can()> subroutine that works exactly as
-described.  It's a convenient shortcut for you.  This actually works in version
-1.10.
+This module can I<optionally> export a C<can()> subroutine that works exactly
+as described.  It's a convenient shortcut for you.  This actually works in
+version 1.11.
 
 Also, if you pass the C<-always_warn> flag on the import line, this module will
 warn about all incorrect uses of C<UNIVERSAL::can()>.  This can help you change your code to be correct.
