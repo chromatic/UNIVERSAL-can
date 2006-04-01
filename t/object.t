@@ -4,7 +4,6 @@ use strict;
 use warnings;
 
 use Test::More tests => 6;
-use Test::Warn;
 
 # enable lexical warnings from module at compile time
 BEGIN { use_ok( 'UNIVERSAL::can' ) }

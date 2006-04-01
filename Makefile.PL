@@ -6,10 +6,10 @@ WriteMakefile
           'VERSION_FROM' => 'lib/UNIVERSAL/can.pm',
           'PREREQ_PM' => {
                            'Scalar::Util' => '',
-                           'Test::Simple' => '0.60',
-                           'Test::Warn' => '0.08'
+                           'Test::Simple' => '0.60'
                          },
           'INSTALLDIRS' => 'site',
+          'EXE_FILES' => [],
           'PL_FILES' => {}
         )
 ;

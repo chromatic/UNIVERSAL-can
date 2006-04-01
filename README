@@ -1,7 +1,7 @@
 UNIVERSAL::can
 --------------
 
-Version 1.11, Fri Feb 10 02:00:38 UTC 2006
+Version 1.12, Sat Apr  1 06:14:06 UTC 2006
 
 This module attempts to work around people calling UNIVERSAL::can() as a
 function, which it is not.

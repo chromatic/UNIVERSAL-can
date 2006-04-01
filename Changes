@@ -1,6 +1,10 @@
 Revision history for UNIVERSAL::can
 
-1.11  Fri Feb 10 01:55:59 UTC 2006 ($Rev$, $Author$)
+1.12  Sat Apr  1 06:13:33 UTC 2006
+	- really made Test::Warn optional
+	- moved developer tests to t/developer/
+
+1.11  Fri Feb 10 01:55:59 UTC 2006
 	- made can() export *optional*, as it can break things...
 	- fixed invocant check to use existing code and avoid infinite
 	  UNIVERSAL::isa loop
