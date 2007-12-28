@@ -10,15 +10,14 @@ my @inputs;
 
 BEGIN
 {
-	@inputs =
-	(
-		undef, '', \'', {}, [], 0, sub {}, do { local *FH; *FH }, -1, 0.003, '.'
-	);
+    @inputs =
+    (
+        undef, '', \'', {}, [], 0, sub {}, do { local *FH; *FH }, -1, 0.003, '.'
+    );
 }
 
 # don't hardcode the test number, but do check for premature death
 use Test::More tests => ( @inputs * 2 ) + 1;
-use Test::SmallWarn;
 
 # enable lexical warnings from module at compile time
 BEGIN { use_ok( 'UNIVERSAL::can' ) }
@@ -59,12 +58,10 @@ check for bad input and DWIM in those cases.
 # test didn't do The Right Thing
 for my $bad ( @inputs )
 {
-	my $bad_name = defined $bad ? $bad : '(undef)';
+    my $bad_name         = defined $bad ? $bad : '(undef)';
+    my $warnings         = '';
+    local $SIG{__WARN__} = sub { $warnings = shift };
 
-	my $flag;
-
-	warning_like { $flag = eval { UNIVERSAL::can( $bad, 'id' ); 1 } }
-	    qr/^Called UNIVERSAL\:\:can\(\) as a function\, not a method/, 
- 		"test received exactly one warning for bad input '$bad_name'";
-	ok( $flag, '... and did not throw an exception' );
+    ok( ! UNIVERSAL::can( $bad, 'id' ), "$bad_name should be false"   );
+    is( $warnings, '',                  '... and not throw a warning' );
 }
