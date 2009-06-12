@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use vars qw( $VERSION $recursing );
-$VERSION = '1.13_001';
+$VERSION = '1.14';
 
 use Scalar::Util 'blessed';
 use warnings::register;
@@ -33,11 +33,16 @@ sub import
 
 sub can
 {
+    my $caller = caller();
+    local $@;
+
     # don't get into a loop here
-    goto &$orig if $recursing;
+    goto &$orig if $recursing
+                || (   defined $caller
+                   &&  defined $_[0]
+                   &&  eval { $caller->isa( $_[0] ); } );
 
     # call an overridden can() if it exists
-    local $@;
     my $can = eval { $_[0]->$orig('can') || 0 };
 
     # but only if it's a real class
@@ -75,7 +80,7 @@ UNIVERSAL::can - Hack around people calling UNIVERSAL::can() as a function
 
 =head1 VERSION
 
-Version 1.13_001
+Version 1.14
 
 =head1 SYNOPSIS
 
@@ -103,7 +108,9 @@ Some people argue that you must call C<UNIVERSAL::can()> as a function because
 you don't know if your proposed invocant is a valid invocant.  That's silly.
 Use C<blessed()> from L<Scalar::Util> if you want to check that the potential
 invocant is an object or call the method anyway in an C<eval> block and check
-for failure.
+for failure (though check the exception I<returned>, as a poorly-written
+C<can()> method could break Liskov and throw an exception other than "You can't
+call a method on this type of invocant").
 
 Just don't break working code.
 
@@ -131,14 +138,15 @@ Mark Clements helped to track down an invalid invocant bug.
 Curtis "Ovid" Poe finally provided the inspiration I needed to clean up the
 interface.
 
+Peter du Marchie van Voorthuysen identified and fixed a problem with calling
+C<SUPER::can>.
+
 The Perl QA list had a huge... discussion... which inspired my realization that
 this module needed to do what it does now.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright (c) 2005 - 2007 chromatic. All rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+Artistic License 2.0, copyright (c) 2005 - 2009 chromatic. Some rights
+reserved.
 
 =cut

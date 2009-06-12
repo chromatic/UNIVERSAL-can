@@ -1,7 +1,7 @@
 UNIVERSAL::can
 --------------
 
-Version 1.13_001, Fri Dec 28 2007
+Version 1.14, Fri Jun 12 2009
 
 This module attempts to work around people calling UNIVERSAL::can() as a
 function, which it is not.
@@ -19,7 +19,7 @@ There is also a Makefile.PL, but I don't use it.
 
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2005 - 2007 chromatic
+Copyright (C) 2005 - 2009 chromatic
 
 This library is free software; you can redistribute it and/or modify it under
 the same terms as Perl itself.

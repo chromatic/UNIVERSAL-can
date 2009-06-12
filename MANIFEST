@@ -9,7 +9,5 @@ t/00-load.t
 t/always_warn.t
 t/bad-input.t
 t/class.t
-t/developer/pod-coverage.t
-t/developer/pod.t
 t/object.t
-Makefile.PL # Do you feel retro?
+t/SUPER-can.t

@@ -1,5 +1,7 @@
 #!perl
 
+package test;
+
 use strict;
 use warnings;
 
