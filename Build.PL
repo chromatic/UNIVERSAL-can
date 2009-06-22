@@ -17,8 +17,11 @@ my $builder = Module::Build->new(
     },
     build_requires      =>
     {
-        'Test::Simple'   => '0.60',
-        'Module::Build'  => '0.33',
+        'Test::Simple'  => '0.60',
+    },
+    config_requires     =>
+    {
+        'Module::Build' => '0.33',
     },
     add_to_cleanup      => [ 'UNIVERSAL-can-*' ],
 );

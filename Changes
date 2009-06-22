@@ -1,5 +1,9 @@
 Revision history for UNIVERSAL::can
 
+1.15  Mon Jun 22 20:39:48 UTC 2009
+    - moved Module::Build dependency to config_requires (RT #47165, hdp)
+    - unified licensing between README and module (RT #46934, nhandler)
+
 1.14  Fri Jun 12 19:43:21 UTC 2009
     - released a new stable version
     - removed developer tests, custom M::B subclass, and passthrough

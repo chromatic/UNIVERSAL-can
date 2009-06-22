@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use vars qw( $VERSION $recursing );
-$VERSION = '1.14';
+$VERSION = '1.15';
 
 use Scalar::Util 'blessed';
 use warnings::register;
