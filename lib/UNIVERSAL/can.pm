@@ -40,7 +40,8 @@ sub can
     goto &$orig if $recursing
                 || (   defined $caller
                    &&  defined $_[0]
-                   &&  eval { local $recursing = 1; $caller->isa($_[0]) } );
+                   &&  eval { local $recursing = 1;
+                              $caller->isa(blessed $_[0] || $_[0]) } );
 
     # call an overridden can() if it exists
     my $can = eval { $_[0]->$orig('can') || 0 };
