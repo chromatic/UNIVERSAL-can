@@ -40,7 +40,8 @@ sub can
     goto &$orig if $recursing
                 || (   defined $caller
                    &&  defined $_[0]
-                   &&  eval { local $recursing = 1; $caller->isa($_[0]) } );
+                   &&  eval { local $recursing = 1;
+                              $caller->isa(blessed $_[0] || $_[0]) } );
 
     # call an overridden can() if it exists
     my $can = eval { $_[0]->$orig('can') || 0 };
@@ -143,12 +144,14 @@ C<SUPER::can>.
 
 Daniel LeWarne found and fixed a deep recursion error.
 
+Norbert Buchmüller fixed an overloading bug in blessed invocants.
+
 The Perl QA list had a huge... discussion... which inspired my realization that
 this module needed to do what it does now.
 
 =head1 COPYRIGHT & LICENSE
 
-Artistic License 2.0, copyright (c) 2005 - 2010 chromatic. Some rights
+Artistic License 2.0, copyright (c) 2005 - 2011 chromatic. Some rights
 reserved.
 
 =cut
