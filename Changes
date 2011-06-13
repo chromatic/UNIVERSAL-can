@@ -1,5 +1,8 @@
 Revision history for UNIVERSAL::can
 
+1.16  Thu Jan 14 22:55:10 UTC 2010
+    - applied patch to fix deep recursion crash (RT #49580, Daniel LeWarne)
+
 1.15  Mon Jun 22 20:39:48 UTC 2009
     - moved Module::Build dependency to config_requires (RT #47165, hdp)
     - unified licensing between README and module (RT #46934, nhandler)

@@ -1,7 +1,8 @@
 UNIVERSAL::can
 --------------
 
-Version 1.15, Mon Jun 22 20:36:50 UTC 2009
+Version 1.16, Thu Jan 14 22:54:46 UTC 2010
+
 
 This module attempts to work around people calling UNIVERSAL::can() as a
 function, which it is not.
@@ -19,4 +20,4 @@ There is also a Makefile.PL, but I don't use it.
 
 COPYRIGHT AND LICENCE
 
-    Artistic License 2.0, Copyright (c) chromatic 2005 - 2009.
+    Artistic License 2.0, Copyright (c) chromatic 2005 - 2010.

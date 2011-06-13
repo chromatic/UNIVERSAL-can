@@ -9,5 +9,6 @@ t/00-load.t
 t/always_warn.t
 t/bad-input.t
 t/class.t
+t/deep-recursion.t
 t/object.t
 t/SUPER-can.t

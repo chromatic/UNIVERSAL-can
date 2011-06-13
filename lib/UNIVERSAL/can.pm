@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use vars qw( $VERSION $recursing );
-$VERSION = '1.15';
+$VERSION = '1.16';
 
 use Scalar::Util 'blessed';
 use warnings::register;
@@ -40,7 +40,7 @@ sub can
     goto &$orig if $recursing
                 || (   defined $caller
                    &&  defined $_[0]
-                   &&  eval { $caller->isa( $_[0] ); } );
+                   &&  eval { local $recursing = 1; $caller->isa($_[0]) } );
 
     # call an overridden can() if it exists
     my $can = eval { $_[0]->$orig('can') || 0 };
@@ -80,7 +80,7 @@ UNIVERSAL::can - Hack around people calling UNIVERSAL::can() as a function
 
 =head1 VERSION
 
-Version 1.14
+Version 1.16
 
 =head1 SYNOPSIS
 
@@ -141,12 +141,14 @@ interface.
 Peter du Marchie van Voorthuysen identified and fixed a problem with calling
 C<SUPER::can>.
 
+Daniel LeWarne found and fixed a deep recursion error.
+
 The Perl QA list had a huge... discussion... which inspired my realization that
 this module needed to do what it does now.
 
 =head1 COPYRIGHT & LICENSE
 
-Artistic License 2.0, copyright (c) 2005 - 2009 chromatic. Some rights
+Artistic License 2.0, copyright (c) 2005 - 2010 chromatic. Some rights
 reserved.
 
 =cut
