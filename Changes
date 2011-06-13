@@ -1,5 +1,10 @@
 Revision history for UNIVERSAL::can
 
+{{$NEXT}}
+    - fixed RT #63771, buggy triggering of overloading for blessed invocants
+      (found and fixed by Norbert Buchmüller)
+    - migrated to Dist::Zilla
+
 1.16  Thu Jan 14 22:55:10 UTC 2010
     - applied patch to fix deep recursion crash (RT #49580, Daniel LeWarne)
 

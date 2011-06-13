@@ -1,16 +1,15 @@
 package UNIVERSAL::can;
+# ABSTRACT: work around buggy code calling UNIVERSAL::can() as a function
 
 use strict;
 use warnings;
 
-use vars qw( $VERSION $recursing );
-$VERSION = '1.16';
+use vars qw( $recursing $always_warn );
 
 use Scalar::Util 'blessed';
 use warnings::register;
 
 my $orig;
-use vars '$always_warn';
 
 BEGIN
 {
@@ -77,11 +76,7 @@ __END__
 
 =head1 NAME
 
-UNIVERSAL::can - Hack around people calling UNIVERSAL::can() as a function
-
-=head1 VERSION
-
-Version 1.16
+UNIVERSAL::can - work around buggy code calling UNIVERSAL::can() as a function
 
 =head1 SYNOPSIS
 
