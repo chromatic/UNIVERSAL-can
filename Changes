@@ -2,6 +2,8 @@ Revision history for UNIVERSAL::can
 
 {{$NEXT}}
 
+1.20110614 2011-06-14 15:32:23 America/Los_Angeles
+
 1.20110613 2011-06-12 18:31:27 America/Los_Angeles
     - fixed RT #63771, buggy triggering of overloading for blessed invocants
       (found and fixed by Norbert Buchmüller)
