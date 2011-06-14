@@ -146,7 +146,7 @@ this module needed to do what it does now.
 
 =head1 COPYRIGHT & LICENSE
 
-Artistic License 2.0, copyright (c) 2005 - 2011 chromatic. Some rights
-reserved.
+Copyright (c) 2005 - 2011, chromatic. This module is made available under the
+same terms as Perl 5.12.
 
 =cut
