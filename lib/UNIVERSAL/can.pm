@@ -3,6 +3,7 @@ package UNIVERSAL::can;
 
 use strict;
 use warnings;
+use 5.008;
 
 use vars qw( $recursing $always_warn );
 
