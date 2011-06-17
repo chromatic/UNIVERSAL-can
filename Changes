@@ -1,6 +1,8 @@
 Revision history for UNIVERSAL::can
 
 {{$NEXT}}
+
+1.20110617 2011-06-17 11:45:11 America/Los_Angeles
     - bumped minimum Perl version to 5.8, as working around 5.6 bugs is not
       worth the trouble
 
