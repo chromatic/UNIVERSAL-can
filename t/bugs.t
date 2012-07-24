@@ -12,7 +12,12 @@ BEGIN { use_ok( 'UNIVERSAL::can', 'can' ) }
     local $SIG{__WARN__} = sub { $warnings .= shift };
     use warnings 'UNIVERSAL::can';
 
-    ok( !UnloadedClass->can('can'),
-        'unloaded class should not be able to can()' );
+    {
+      local $TODO = "UnloadedClass->can('can') fails until 5.17.2"
+          if $] < 5.017002;
+      ok( UnloadedClass->can('can'),
+          'unloaded class should be able to can()' );
+    }
+
     is( $warnings, '', '... and should not warn' );
 }
