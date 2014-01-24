@@ -1,6 +1,8 @@
 Revision history for UNIVERSAL::can
 
 {{$NEXT}}
+
+1.20140124 2014-01-24 11:02:04 America/Los_Angeles
     - added =encoding to POD (thanks to Debian Perl Group)
 
 1.20120726 2012-07-25 20:52:38 America/Los_Angeles
