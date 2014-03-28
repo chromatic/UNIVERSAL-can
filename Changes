@@ -1,6 +1,8 @@
 Revision history for UNIVERSAL::can
 
 {{$NEXT}}
+
+1.20140328 2014-03-28 16:21:13-07:00 America/Los_Angeles
     - eliminated a UNIVERSAL::isa warning
 
 1.20140124 2014-01-24 11:02:04 America/Los_Angeles
