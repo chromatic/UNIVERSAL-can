@@ -41,6 +41,8 @@ sub can
                 || (   defined $caller
                    &&  defined $_[0]
                    &&  eval { local $recursing = 1;
+                              warnings->unimport( 'UNIVERSAL::isa' )
+                                  if $INC{'UNIVERSAL::isa'};
                               $caller->isa(blessed $_[0] || $_[0]) } );
 
     # call an overridden can() if it exists
